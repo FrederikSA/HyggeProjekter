@@ -1,0 +1,29 @@
+.overskrift {
+    color: rgb(0, 120, 141);
+    background-color: rgb(226, 191, 85, 0.541);
+    width: 390px;
+}
+
+.musik-album {
+    color: beige;
+    background-color:darkgreen; 
+    width: 200px
+  }
+.musik-album:hover {
+  color: darkgreen;
+  background-color:beige; 
+  width: 200px
+}
+.album-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.album-cover {
+  width: 150px;
+  height: auto;
+  margin-left: -180px;
+}
+

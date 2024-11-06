@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musik Album</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <p>
+        <a href="index.html">Hjem</a>
+    </p>
+    <h1 style="color:red; background-color: black; height: 100px; display: flex; justify-content: center; align-items: center; text-align: center;"><strong>Dette er min testside2!!!</strong></h1>
+    <br> <br>
+
+    <h1 class="musik-album">Musik Album</h1>
+    <hr style="border: none; height: 2px; background-color: black;">
+    <div id="albums"></div>
+
+    <script>
+        fetch('albums.json')
+            .then(response => response.json())
+            .then(data => {
+                const albumsDiv = document.getElementById('albums');
+
+                data.forEach(album => {
+                    const albumElement = document.createElement('div');
+                    albumElement.innerHTML = `
+                        <h3 style="color: rgb(103, 131, 103); background-color: beige; width:300px"><strong  style="color: rgb(0, 171, 0); background-color: antiquewhite; width: 270px">Albummets navn:</strong> ${album.albumName}</h3>
+                        <p style="background-color: blanchedalmond; width: 170px"><strong style="color: darkgoldenrod;">Kunstner:</strong> <a href="${album.artistWebsite}" target="_blank">${album.artistName}</a></p>
+                        <p style="color: beige; background-color: darkolivegreen; width: 120px"><strong style="color: khaki;">Antal tracks:</strong> ${album.trackList.length}</p>
+                        <p style="color: white; background-color: lightslategrey; width: 370px"><strong style="color: rgb(245, 230, 170);">Min valgfri oplysning er årstal albummet er fra:</strong> ${album.productionYear}</p>
+                        <br>
+                        <hr style="border: none; height: 2px; background-color: black;">
+                        <br>
+                        `;
+                    
+                    albumsDiv.appendChild(albumElement);
+                });
+            })
+            .catch(error => {
+                console.error('Fejl ved indlæsning af albums:', error);
+            });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musik Album</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+        table, th, td {
+            border: 0.5px solid black;
+        }
+
+    </style>   
+    <style>
+        /* Brug !important for at sikre, at hover-effekten tager prioritet */
+        .hover-red:hover {
+            color: red !important;
+        }
+    </style>
+</head>
+<body>
+    <p><a href="index.html">Hjem</a></p>
+    <h1 style="color:red; background-color: black; height: 100px; display: flex; justify-content: center; align-items: center; text-align: center;"><strong>Dette er min øvelses side fra modul 3</strong></h1>
+    <br> <br>
+
+    <h1 class="musik-album">Musik Album</h1>
+    <div id="albums"></div>
+    
+    <table style="width:80%; text-align: center; " id="albumTable">
+        <tr>
+            <th></th>
+            <th id="test">Albummets navn:</th>
+            <th>Kunstner:</th>
+            <th>Antal tracks:</th>
+            <th>Min valgfrie oplysning er årstal albummet er fra:</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>Greatest hits</td>
+            <td>ZZ-top</td>
+            <td class="hover-red" onclick="toggleTracks(1, this);" style="color:rgb(3, 65, 65)"><u>18</u></td>
+            <td>1992</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>Wild Cherry</td>
+            <td>Wild Cherry</td>
+            <td class="hover-red" onclick="toggleTracks(2, this)" style="color:rgb(3, 65, 65)"><u>9</u></td>
+            <td>1976</td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>Meteora</td>
+            <td>Linkin Park</td>
+            <td class="hover-red" onclick="toggleTracks(3, this)" style="color:rgb(3, 65, 65)"><u>13</u></td>
+            <td>2003</td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>Top gun - motion picture soundtrack</td>
+            <td>Various</td>
+            <td>10</td>
+            <td>1989</td>
+        </tr>
+        <tr>
+            <td>5.</td>
+            <td>Hjertestarter - bonus edition</td>
+            <td>Nephew</td>
+            <td>11</td>
+            <td>2013</td>
+        </tr>
+        <tr>
+            <td>6.</td>
+            <td>USADSB</td>
+            <td>Nephew</td>
+            <td>10</td>
+            <td>2004</td>
+        </tr>
+        <tr>
+            <td>7.</td>
+            <td>Joyride</td>
+            <td>Roxette</td>
+            <td>15</td>
+            <td>1991</td>
+        </tr>
+        <tr>
+            <td>8.</td>
+            <td>Slippery when wet</td>
+            <td>Bon Jovi</td>
+            <td>13</td>
+            <td>2010</td>
+        </tr>
+        <tr>
+            <td>9.</td>
+            <td>Crazy world</td>
+            <td>Scorpions</td>
+            <td>11</td>
+            <td>1990</td>
+        </tr>
+        <tr>
+            <td>10.</td>
+            <td>The razors edge</td>
+            <td>AC/DC</td>
+            <td>12</td>
+            <td>1990</td>
+        </tr>
+        </table>
+    </table>
+
+    <script>
+        // Liste over sange for hvert album
+        const albumTracks = {
+            1: ["1. Gimme all your lovin", "2. sharp dressed man", "3. Rough boy", "4. Tush", "5. My head's in Mississippi", "6. Pearl Necklace", "7. I'm bad, I'm nationwide", "8. Viva Las Vegas", "9. Doubleback", "10. Gun Love", "11. Got me under pressure", "12. Give it up", "13. Cheap sunglasses", "14. Sleeping bag", "15. Planet of women", "16. La Grange", "17. Tube snake boogie", "18. Legs-remix version"],
+            2: ["1. Play that funky music", "2. The lady wants your money", "3. 99 1/2", "4. Don't go near the water", "5. Nowhere to rum", "6. I feel sanctified", "7. Hold on", "8. Get it up", "9. What in the funk do you see"],
+            3: ["1. Foreword", "2. Don't stay", "3. Somewhere I belong", "4. Lying from you", "5. Hot the floor", "6. Easier to run", "7. Faint", "8. Figure.09", "9. Breaking the habit", "10. From the inside", "11. Nobody's listening", "12. Session", "13. Numb"],
+        };
+
+        function toggleTracks(albumNumber, clickedElement) {
+            const currentRow = clickedElement.parentNode;
+            const nextRow = currentRow.nextSibling;
+
+            // Hvis der allerede er en række med tracks, fjern den
+            if (nextRow && nextRow.classList && nextRow.classList.contains('track-row')) {
+                nextRow.remove();
+            } else {
+                // Opret ny række med tracks
+                const trackRow = document.createElement('tr');
+                trackRow.classList.add('track-row');
+                
+                const trackCell = document.createElement('td');
+                trackCell.setAttribute('colspan', '5');
+                trackCell.innerHTML = albumTracks[albumNumber].join('<br>');
+
+                trackRow.appendChild(trackCell);
+
+                // Indsæt den nye række lige efter den række, der blev klikket på
+                currentRow.parentNode.insertBefore(trackRow, currentRow.nextSibling);
+            }
+        }
+    </script>
+    <p>
+        For at se numrene i albummet klikker man blot på det antal tracks, som albummet har
+    </p>
+
+
+    <script>
+        function changeTextColor(element, color) {
+            element.style.color = color;
+        }
+    </script> 
+
+    <script>
+        document.getElementById("test").style.color = "darkblue";
+        document.getElementById("test").innerHTML = "Albummets navn:"
+    </script>
+    
+    <script>
+        let mainContentArea = document.getElementById("main-content-area");
+    
+        fetchData("Data/data.json").then((data) => {
+            console.log(data);
+    
+            for (let i = 0; i < data.length; i++) {
+                // Tjek om forfatteren er Jane Doe
+                if (data[i].author === "Jane Doe") {
+                    let articleToInsert =
+                        "<div id='" +
+                        data[i].id +
+                        "' class='content'>" +
+                        "<h1>" +
+                        data[i].heading +
+                        "</h1>" +
+                        "<p class='inner-content'>" +
+                        data[i].content +
+                        "</p>" +
+                        "<p class='author'>" +
+                        data[i].author +
+                        "</p>" +
+                        "<p class='contact'>" +
+                        data[i].email +
+                        "</p>" +
+                        "</div>";
+    
+                    mainContentArea.innerHTML = mainContentArea.innerHTML + articleToInsert;
+                }
+            }
+        });
+    </script>
+    
+    
+</body>
+</html>

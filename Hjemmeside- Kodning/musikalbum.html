@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musik Album</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style>
+        body {
+    background-color: antiquewhite;
+}
+    </style>
+    <style>
+        table, th, td {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        <a href="index.html">Hjem</a>
+    </p>
+
+    <h1 class="musik-album">Musik Album</h1>
+    <div id="albums"></div>
+
+    <script>
+fetch('jsonFiler/albums.json')
+    .then(response => response.json())
+    .then(data => {
+        const albumsDiv = document.getElementById('albums');
+
+        data.forEach((album, index) => {
+            const albumElement = document.createElement('div');
+            albumElement.classList.add('album-container');
+
+            const imageUrl = (index === 0)
+                ? 'https://content.gucca.dk/covers/400/z/z/zz-top-greatest-hits_12082.jpg'
+                : (index === 1)
+                ? 'https://upload.wikimedia.org/wikipedia/en/6/63/Wild_Cherry_album_cover.jpg'
+                : (index === 2)
+                ? 'https://static.posters.cz/image/1300/plakater/linkin-park-meteora-i876.jpg'
+                : (index === 3)
+                ? 'https://1265745076.rsc.cdn77.org/1024/jpg/35891-various-top-gun-original-motion-picture-soundtrack-LP-5b111ddeb1b6d.jpg'
+                : (index === 4)
+                ? 'https://www.gaffashop.dk/images/n/nephewhjertestartercoverrgb-p.jpg'
+                : (index === 5)
+                ? 'https://www.gaffashop.dk/images/Nephew-Usadsb.png'
+                : (index === 6)
+                ? 'https://upload.wikimedia.org/wikipedia/en/d/dd/Roxette_-_Joyride.png'
+                : (index === 7)
+                ? 'https://i.scdn.co/image/ab67616d0000b2731336b31b6a1799f0de5807ac'
+                : (index === 8)
+                ? 'https://upload.wikimedia.org/wikipedia/en/f/f0/ScorpionsCrazyWorld.jpg'
+                : (index === 9)
+                ? 'https://upload.wikimedia.org/wikipedia/en/a/a8/Razorsedge.jpg'
+                : '';
+
+            albumElement.innerHTML = `
+                <table style="text-align: center;">
+                    <tr>
+                        <th><h3 style="width:320px;"><strong  style="color: rgb(0, 171, 0);">Albummets navn:</strong></h3></th>
+                        <th><p style="width: 100px"><strong  style="color: rgb(163, 130, 51);">Kunstner:</strong></p></th>
+                        <th><p style="width: 100px"><strong  style="color: darkolivegreen;">Antal tracks:</strong></p></th>
+                        <th><p style="width: 350px"><strong  style="color: lightslategrey;">Min valgfrie oplysning er årstal albummet er fra:</strong></p></th>
+                    </tr>
+                    <tr>
+                        <td><h3><strong  style="color: rgb(103, 131, 103);">${album.albumName}</strong></h3></td>
+                        <td><p><a href="${album.artistWebsite}" target="_blank">${album.artistName}</a></p></td>
+                        <td><p><strong  style="color: darkgoldenrod;">${album.trackList.length}</strong></p></td>
+                        <td><p><strong  style="color: darkcyan;">${album.productionYear}</strong></p></td>
+                    </tr>
+                </table>
+                <img src="${imageUrl}" alt="Album Cover" class="album-cover">
+                <br> <br>
+            `;
+            
+            albumsDiv.appendChild(albumElement);
+        });
+    })
+    .catch(error => {
+        console.error('Fejl ved indlæsning af albums:', error);
+    });
+    </script>
+    <img src="https://www.stickershoppe.com/mm5/graphics/00000001/S-6057.jpg" alt="Album Cover" class="album-cover">
+</body>
+</html>
